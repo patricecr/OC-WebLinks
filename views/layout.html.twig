@@ -18,10 +18,33 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">WebLinks</a>
+                    <a class="navbar-brand" href="{{ path('home') }}">WebLinks</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                    
+                    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="#">Submit link</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('login') }}">Log in</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div><!-- /.container -->
         </nav>
