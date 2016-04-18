@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                         <ul class="nav navbar-nav">
-                            <li class=""><a href="#">Submit link</a></li>
+                            <li class=""><a href="{{ path('link_submit') }}">Submit link</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
