@@ -51,7 +51,7 @@ class LinkDAO extends DAO
     }
 
     /**
-     * Creates an Link object based on a DB row.
+     * Creates a Link object based on a DB row.
      *
      * @param array $row The DB row containing Link data.
      * @return \WebLinks\Domain\Link
