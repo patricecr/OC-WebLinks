@@ -32,6 +32,23 @@ class LinkDAO extends DAO
         }
         return $entities;
     }
+    
+    /**
+    * Returns a link matching the supplied id.
+    *
+    * @param integer $id
+    *
+    * @return \WebLinks\Domain\Link|throws an exception if no matching link is found
+    */
+    public function find($id) {
+        $sql = "select * from t_link where link_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No link matching id " . $id);
+    }
 
     /**
      * Creates an Link object based on a DB row.
@@ -77,5 +94,24 @@ class LinkDAO extends DAO
             $id = $this->getDb()->lastInsertId();
             $link->setId($id);
         }
+    }
+    
+    /**
+     * Removes a link from the database.
+     *
+     * @param integer $id The link id.
+     */
+    public function delete($id) {
+        // Delete the link
+        $this->getDb()->delete('t_link', array('link_id' => $id));
+    }
+    
+    /**
+     * Removes all links for a user
+     *
+     * @param integer $userId The id of the user
+     */
+    public function deleteAllByUser($userId) {
+        $this->getDb()->delete('t_link', array('user_id' => $userId));
     }
 }
